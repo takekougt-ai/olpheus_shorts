@@ -2,12 +2,12 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 from . import config
-from .google_auth import get_credentials
+from .google_auth import get_youtube_credentials
 
 
 class YouTubeClient:
     def __init__(self):
-        creds = get_credentials()
+        creds = get_youtube_credentials()
         self.service = build("youtube", "v3", credentials=creds, cache_discovery=False)
 
     def upload_short(self, file_path: str, title: str, description: str) -> str:

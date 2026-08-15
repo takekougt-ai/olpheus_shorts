@@ -13,9 +13,13 @@ def _env(name: str, default: str | None = None, required: bool = False) -> str |
 
 DRIVE_FOLDER_ID = _env("DRIVE_FOLDER_ID", required=True)
 
+# A single OAuth client (client_id/secret) is reused to authorize two
+# different Google accounts: one that owns the Drive folder, and one that
+# owns the YouTube channel. Each account gets its own refresh token.
 GOOGLE_CLIENT_ID = _env("GOOGLE_CLIENT_ID", required=True)
 GOOGLE_CLIENT_SECRET = _env("GOOGLE_CLIENT_SECRET", required=True)
-GOOGLE_REFRESH_TOKEN = _env("GOOGLE_REFRESH_TOKEN", required=True)
+DRIVE_REFRESH_TOKEN = _env("DRIVE_REFRESH_TOKEN", required=True)
+YOUTUBE_REFRESH_TOKEN = _env("YOUTUBE_REFRESH_TOKEN", required=True)
 
 TIKTOK_CLIENT_KEY = _env("TIKTOK_CLIENT_KEY", required=True)
 TIKTOK_CLIENT_SECRET = _env("TIKTOK_CLIENT_SECRET", required=True)

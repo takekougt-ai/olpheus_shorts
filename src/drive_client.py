@@ -3,12 +3,12 @@ import io
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 
-from .google_auth import get_credentials
+from .google_auth import get_drive_credentials
 
 
 class DriveClient:
     def __init__(self):
-        creds = get_credentials()
+        creds = get_drive_credentials()
         self.service = build("drive", "v3", credentials=creds, cache_discovery=False)
 
     def list_videos(self, folder_id: str) -> list[dict]:

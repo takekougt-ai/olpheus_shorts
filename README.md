@@ -22,17 +22,31 @@ https://drive.google.com/drive/folders/<この部分がDRIVE_FOLDER_ID>
 
 ### 2. Google Cloud の準備
 
+Drive フォルダの所有アカウントと YouTube チャンネルの所有アカウントが異なる場合でも、**同じ OAuth クライアント (client_id/secret) を使い回して、アカウントごとに別々のリフレッシュトークンを発行**すれば問題ありません。
+
 1. Google Cloud Console でプロジェクトを作成し、**Google Drive API** と **YouTube Data API v3** を有効化します。
 2. 「認証情報」から OAuth クライアントID (種類: デスクトップアプリ) を作成し、client_id / client_secret を控えます。
-3. OAuth 同意画面で、動画を投稿したい Google アカウント(YouTubeチャンネルの持ち主)をテストユーザーとして追加します。
-4. ローカル環境で以下を実行し、リフレッシュトークンを取得します(ブラウザが開き、ログイン・権限許可を求められます)。
+3. OAuth 同意画面の「テストユーザー」に、**Drive フォルダを持つ Google アカウント** と **YouTube チャンネルを持つ Google アカウント** の両方を追加します(アプリが「テスト」ステータスのままだと、テストユーザー登録されたアカウントしかログインできません)。
+4. ローカル環境で以下を実行し、**Drive アカウント用**のリフレッシュトークンを取得します(ブラウザが開くので、Drive フォルダを持つアカウントでログイン・許可してください)。
 
 ```bash
 pip install -r requirements.txt
-python scripts/authorize_google.py --client-id YOUR_CLIENT_ID --client-secret YOUR_CLIENT_SECRET
+python scripts/authorize_google.py \
+  --client-id YOUR_CLIENT_ID \
+  --client-secret YOUR_CLIENT_SECRET \
+  --target drive
 ```
 
-表示された `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` / `GOOGLE_REFRESH_TOKEN` を後で GitHub Secrets に登録します。
+5. 続けて、**別ブラウザ/シークレットウィンドウ**などで一旦ログアウトした状態にしてから、以下を実行し**YouTube アカウント用**のリフレッシュトークンを取得します(YouTube チャンネルを持つアカウントでログイン・許可してください)。
+
+```bash
+python scripts/authorize_google.py \
+  --client-id YOUR_CLIENT_ID \
+  --client-secret YOUR_CLIENT_SECRET \
+  --target youtube
+```
+
+それぞれ表示された `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` / `DRIVE_REFRESH_TOKEN` / `YOUTUBE_REFRESH_TOKEN` を後で GitHub Secrets に登録します(client_id/secret は共通の値です)。
 
 ### 3. TikTok Developers の準備
 
@@ -62,7 +76,8 @@ python scripts/authorize_tiktok.py \
 | `DRIVE_FOLDER_ID` | 手順1で控えたフォルダID |
 | `GOOGLE_CLIENT_ID` | 手順2 |
 | `GOOGLE_CLIENT_SECRET` | 手順2 |
-| `GOOGLE_REFRESH_TOKEN` | 手順2 |
+| `DRIVE_REFRESH_TOKEN` | 手順2 (`--target drive` で取得) |
+| `YOUTUBE_REFRESH_TOKEN` | 手順2 (`--target youtube` で取得) |
 | `TIKTOK_CLIENT_KEY` | 手順3 |
 | `TIKTOK_CLIENT_SECRET` | 手順3 |
 | `TIKTOK_REFRESH_TOKEN` | 手順3 |
