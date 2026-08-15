@@ -3,8 +3,8 @@ Run this locally ONCE PER ACCOUNT to obtain a Google OAuth refresh token.
 
 The Drive folder and the YouTube channel can belong to two different
 Google accounts. Run this script twice with --target drive / --target
-youtube, logging in with the matching account's browser session each time
-(use an incognito/private window, or log out first, to switch accounts).
+youtube, logging in with the matching account each time (use an
+incognito/private window, or log out first, to switch accounts).
 
 Prerequisites:
   - A Google Cloud project with the "Google Drive API" and
@@ -20,18 +20,26 @@ Usage:
         --client-secret YOUR_CLIENT_SECRET \
         --target drive
 
-    python scripts/authorize_google.py \
-        --client-id YOUR_CLIENT_ID \
-        --client-secret YOUR_CLIENT_SECRET \
-        --target youtube
-
-A browser window will open for you to sign in and grant access. Afterward
-the script prints the values to save as GitHub Actions secrets.
+Steps:
+  1. The script prints an authorization URL. Open it in a browser, log in
+     with the matching account, and approve access.
+  2. The browser is redirected to http://localhost/... which will show a
+     "connection refused" / "site can't be reached" error page -- that is
+     expected, since nothing is actually listening there. You only need
+     the URL from the browser's address bar.
+  3. Paste that FULL address-bar URL back into this script when prompted.
 """
 
 import argparse
+import os
 
-from google_auth_oauthlib.flow import InstalledAppFlow
+# The redirect URI below is http:// (not https://), which the underlying
+# oauthlib would otherwise reject as an insecure transport. This is safe
+# here because the "connection" never actually leaves the local machine;
+# we only read the code out of the redirected URL, we never send it there.
+os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")
+
+from google_auth_oauthlib.flow import Flow  # noqa: E402
 
 SCOPES_BY_TARGET = {
     "drive": ["https://www.googleapis.com/auth/drive.readonly"],
@@ -41,6 +49,7 @@ SECRET_NAME_BY_TARGET = {
     "drive": "DRIVE_REFRESH_TOKEN",
     "youtube": "YOUTUBE_REFRESH_TOKEN",
 }
+REDIRECT_URI = "http://localhost"
 
 
 def main() -> None:
@@ -61,11 +70,23 @@ def main() -> None:
             "client_secret": args.client_secret,
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
-            "redirect_uris": ["http://localhost"],
+            "redirect_uris": [REDIRECT_URI],
         }
     }
-    flow = InstalledAppFlow.from_client_config(client_config, scopes=SCOPES_BY_TARGET[args.target])
-    creds = flow.run_local_server(port=0)
+    flow = Flow.from_client_config(client_config, scopes=SCOPES_BY_TARGET[args.target], redirect_uri=REDIRECT_URI)
+    auth_url, _ = flow.authorization_url(access_type="offline", prompt="consent", include_granted_scopes="true")
+
+    print(f"\n[{args.target}] Open this URL in your browser and approve access:\n")
+    print(auth_url)
+    print(
+        "\nAfter approving, the browser will land on a 'connection refused' "
+        "page at http://localhost/... -- that's expected. Copy the FULL "
+        "URL from the address bar."
+    )
+
+    redirected_url = input("\nPaste the full redirected URL here: ").strip()
+    flow.fetch_token(authorization_response=redirected_url)
+    creds = flow.credentials
 
     secret_name = SECRET_NAME_BY_TARGET[args.target]
     print(f"\n=== Save these as GitHub Actions secrets ({args.target} account) ===")
