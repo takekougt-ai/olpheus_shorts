@@ -21,9 +21,12 @@ GOOGLE_CLIENT_SECRET = _env("GOOGLE_CLIENT_SECRET", required=True)
 DRIVE_REFRESH_TOKEN = _env("DRIVE_REFRESH_TOKEN", required=True)
 YOUTUBE_REFRESH_TOKEN = _env("YOUTUBE_REFRESH_TOKEN", required=True)
 
-TIKTOK_CLIENT_KEY = _env("TIKTOK_CLIENT_KEY", required=True)
-TIKTOK_CLIENT_SECRET = _env("TIKTOK_CLIENT_SECRET", required=True)
-TIKTOK_REFRESH_TOKEN = _env("TIKTOK_REFRESH_TOKEN", required=True)
+# TikTok posting is optional. Leave these three unset to post to YouTube
+# Shorts only; the bot will skip the TikTok step entirely.
+TIKTOK_CLIENT_KEY = _env("TIKTOK_CLIENT_KEY")
+TIKTOK_CLIENT_SECRET = _env("TIKTOK_CLIENT_SECRET")
+TIKTOK_REFRESH_TOKEN = _env("TIKTOK_REFRESH_TOKEN")
+TIKTOK_ENABLED = bool(TIKTOK_CLIENT_KEY and TIKTOK_CLIENT_SECRET and TIKTOK_REFRESH_TOKEN)
 # Unaudited TikTok apps may only post as SELF_ONLY (private/draft). Once the
 # app passes TikTok's Content Posting API audit, this can be changed to
 # PUBLIC_TO_EVERYONE / MUTUAL_FOLLOW_FRIENDS / FOLLOWER_OF_CREATOR.

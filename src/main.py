@@ -103,7 +103,11 @@ def main() -> int:
                 print("YouTube upload failed. Will retry the same video on the next run.")
                 return 1
 
-        if not pending["tiktok_done"]:
+        if not config.TIKTOK_ENABLED:
+            print("TikTok is not configured; skipping TikTok upload.")
+            pending["tiktok_done"] = True
+            store.save(state)
+        elif not pending["tiktok_done"]:
             print("Uploading to TikTok...")
             try:
                 tiktok = TikTokClient()

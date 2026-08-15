@@ -50,7 +50,9 @@ python scripts/authorize_google.py \
 
 それぞれ表示された `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` / `DRIVE_REFRESH_TOKEN` / `YOUTUBE_REFRESH_TOKEN` を後で GitHub Secrets に登録します(client_id/secret は共通の値です)。
 
-### 3. TikTok Developers の準備
+### 3. TikTok Developers の準備(任意)
+
+TikTokへの投稿は任意です。`TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET` / `TIKTOK_REFRESH_TOKEN` の3つのSecretsを未設定のままにしておけば、Botは自動的にTikTok投稿をスキップし、YouTube Shortsのみに投稿します。後からTikTok連携を追加したくなった場合は、以下の手順でSecretsを登録すれば有効になります。
 
 1. [TikTok for Developers](https://developers.tiktok.com/) でアプリを作成し、**Content Posting API** プロダクトを追加、`video.publish` スコープを有効化します。
 2. リダイレクトURI(自分が管理するHTTPSのURLで構いません)を登録します。
@@ -80,9 +82,9 @@ python scripts/authorize_tiktok.py \
 | `GOOGLE_CLIENT_SECRET` | 手順2 |
 | `DRIVE_REFRESH_TOKEN` | 手順2 (`--target drive` で取得) |
 | `YOUTUBE_REFRESH_TOKEN` | 手順2 (`--target youtube` で取得) |
-| `TIKTOK_CLIENT_KEY` | 手順3 |
-| `TIKTOK_CLIENT_SECRET` | 手順3 |
-| `TIKTOK_REFRESH_TOKEN` | 手順3 |
+| `TIKTOK_CLIENT_KEY` | 手順3(任意。未設定ならTikTok投稿をスキップ) |
+| `TIKTOK_CLIENT_SECRET` | 手順3(任意。未設定ならTikTok投稿をスキップ) |
+| `TIKTOK_REFRESH_TOKEN` | 手順3(任意。未設定ならTikTok投稿をスキップ) |
 
 **Variables(任意・未設定ならデフォルト値を使用)**
 
