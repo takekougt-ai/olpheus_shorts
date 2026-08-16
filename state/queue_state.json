@@ -33,14 +33,16 @@
     "1oEtxx7QuPA9SFu50YPQjbNx-AK4rjXRg",
     "1y9BvtRJBWq4e_a9Llk-Y-i57aFakk8Oq"
   ],
-  "cursor": 0,
-  "pending": {
-    "file_id": "13Bi8Q6pVQBpVsqPB3wcLubtZbXTwZBZf",
-    "file_name": "terminal7.mp4",
-    "youtube_done": false,
-    "tiktok_done": false,
-    "youtube_video_id": null,
-    "tiktok_publish_id": null
-  },
-  "history": []
+  "cursor": 1,
+  "pending": null,
+  "history": [
+    {
+      "posted_at": "2026-08-16T10:31:06.542766+00:00",
+      "cycle": 1,
+      "file_id": "13Bi8Q6pVQBpVsqPB3wcLubtZbXTwZBZf",
+      "file_name": "terminal7.mp4",
+      "youtube_video_id": "mpolqt6rDGY",
+      "tiktok_publish_id": null
+    }
+  ]
 }
