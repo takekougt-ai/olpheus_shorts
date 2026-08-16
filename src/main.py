@@ -19,7 +19,7 @@ def build_caption(file_name: str) -> tuple[str, str]:
     caption = base
     if config.HASHTAGS:
         caption = f"{caption}\n\n{config.HASHTAGS}"
-    return base[:100], caption
+    return config.VIDEO_TITLE[:100], caption
 
 
 def pick_next_file(state, file_map: dict, store: StateStore) -> str:
