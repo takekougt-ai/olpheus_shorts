@@ -90,7 +90,7 @@ python scripts/authorize_tiktok.py \
 
 | 名前 | デフォルト | 内容 |
 |---|---|---|
-| `VIDEO_TITLE` | `OLPHEUS Shorts` | YouTubeのタイトルとして全動画共通で使う文字列 |
+| `VIDEO_TITLE` | `OLPHEUS daily shorts` | YouTubeのタイトルとして全動画共通で使う文字列 |
 | `TIKTOK_PRIVACY_LEVEL` | `SELF_ONLY` | TikTok投稿の公開範囲 |
 | `YOUTUBE_PRIVACY_STATUS` | `public` | YouTube投稿の公開範囲 (`public`/`unlisted`/`private`) |
 | `YOUTUBE_CATEGORY_ID` | `22` | YouTubeカテゴリID |
@@ -104,7 +104,7 @@ python scripts/authorize_tiktok.py \
 
 ## 投稿タイトル・キャプション
 
-YouTube のタイトルは全動画共通で `VIDEO_TITLE`(デフォルト `OLPHEUS Shorts`)を使います。説明欄/TikTokのキャプションは Drive 上のファイル名(拡張子を除く)がベースになり、`HASHTAGS` を末尾に追記します。個別の動画ごとに凝ったキャプションを付けたい場合は、ファイル名に工夫するか `src/main.py` の `build_caption()` を拡張してください。
+YouTube のタイトルは全動画共通で `VIDEO_TITLE`(デフォルト `OLPHEUS daily shorts`)を使います。説明欄/TikTokのキャプションは Drive 上のファイル名(拡張子を除く)がベースになり、`HASHTAGS` を末尾に追記します。個別の動画ごとに凝ったキャプションを付けたい場合は、ファイル名に工夫するか `src/main.py` の `build_caption()` を拡張してください。
 
 ## 状態ファイル (`state/queue_state.json`)
 
