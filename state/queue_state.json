@@ -33,7 +33,7 @@
     "1oEtxx7QuPA9SFu50YPQjbNx-AK4rjXRg",
     "1y9BvtRJBWq4e_a9Llk-Y-i57aFakk8Oq"
   ],
-  "cursor": 13,
+  "cursor": 14,
   "pending": null,
   "history": [
     {
@@ -138,6 +138,14 @@
       "file_id": "1XWcY1AGQdNDMkuC-D0kcB5Y-ZD85xUCn",
       "file_name": "shiokaze1.mp4",
       "youtube_video_id": "ckZuB8-KtSI",
+      "tiktok_publish_id": null
+    },
+    {
+      "posted_at": "2026-08-30T15:32:29.634576+00:00",
+      "cycle": 1,
+      "file_id": "1hSTF1s7hzMUT_HwLWIybyL6FM3kBiXza",
+      "file_name": "terminal3.mp4",
+      "youtube_video_id": "zG8sF4hON_k",
       "tiktok_publish_id": null
     }
   ]
