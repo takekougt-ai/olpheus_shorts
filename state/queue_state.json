@@ -43,7 +43,7 @@
     "1hg0Zx5teXetQQ8qN8GtyIVsb0mgwNYNi",
     "14yE-QT2cJ6YXeY8zur-5zAfS-cIkdmCC"
   ],
-  "cursor": 11,
+  "cursor": 12,
   "pending": null,
   "history": [
     {
@@ -380,6 +380,14 @@
       "file_id": "1h-xQeArbA1TCXiA4lPbMdr27Borrei5L",
       "file_name": "moratoriamu21.mp4",
       "youtube_video_id": "hpY9kYU3gQI",
+      "tiktok_publish_id": null
+    },
+    {
+      "posted_at": "2026-09-28T18:48:50.354651+00:00",
+      "cycle": 2,
+      "file_id": "1ten0CvazRrZHKwO7NZbJNPS-gkPOVj2k",
+      "file_name": "terminal6.mp4",
+      "youtube_video_id": "AfJn1x2JjYQ",
       "tiktok_publish_id": null
     }
   ]
