@@ -2,9 +2,11 @@ name: Daily Shorts Auto-Post
 
 on:
   schedule:
-    # 12:00 UTC = 21:00 JST. Adjust to taste; GitHub Actions cron may fire a
-    # few minutes late during high load.
-    - cron: "0 12 * * *"
+    # 12:07 UTC = 21:07 JST. GitHub Actions schedules things exactly on the
+    # hour are more prone to queueing delays, so this is offset by a few
+    # minutes. Even so, GitHub does not guarantee exact-time execution for
+    # scheduled workflows.
+    - cron: "7 12 * * *"
   workflow_dispatch: {}
 
 permissions:

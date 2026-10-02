@@ -99,7 +99,8 @@ python scripts/authorize_tiktok.py \
 
 ### 5. ワークフローを有効化
 
-- `.github/workflows/daily_post.yml` は毎日 12:00 UTC (= 21:00 JST) に自動実行されます。時刻を変えたい場合は `cron` の値を編集してください。
+- `.github/workflows/daily_post.yml` は毎日 12:07 UTC (= 21:07 JST) に自動実行されます。時刻を変えたい場合は `cron` の値を編集してください。
+- GitHub Actionsのスケジュール実行は仕様上、正時(00分)に負荷が集中しやすく遅延しがちです。そのため分を00からずらしていますが、それでも実行時刻が数十分〜数時間ずれることがあります(GitHubの既知の制約で、確実な解消方法はありません)。
 - 動作確認は Actions タブから `Daily Shorts Auto-Post` を **workflow_dispatch(手動実行)** で試せます。
 
 ## 投稿タイトル・キャプション
